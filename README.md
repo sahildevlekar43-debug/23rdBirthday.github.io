@@ -62,6 +62,7 @@ margin:auto;
 line-height:1.8;
 color:#d6d6d6;
 font-size:18px;
+white-space:pre-line;
 }
 
 .cake{
@@ -133,17 +134,25 @@ to{transform:scale(1.3)}
 <!-- PAGE 1 -->
 
 <section class="hero" id="page1">
+
 <h1>Shreyu ❤️</h1>
+
 <p>Sahil made something special for you</p>
+
 <button onclick="nextPage(1)">Continue</button>
+
 </section>
 
 <!-- PAGE 2 -->
 
 <section class="hero hidden" id="page2">
+
 <h1>Wait...</h1>
+
 <p>Are you really ready for this surprise?</p>
+
 <button onclick="nextPage(2)">Yes I am</button>
+
 </section>
 
 <!-- PAGE 3 -->
@@ -169,9 +178,13 @@ No
 <!-- PAGE 4 -->
 
 <section class="hero hidden" id="page4">
+
 <h1>Last chance 😄</h1>
+
 <p>Are you REALLY ready?</p>
+
 <button onclick="startSite()">Show me the surprise</button>
+
 </section>
 
 <!-- MAIN PAGE -->
@@ -179,8 +192,11 @@ No
 <div id="main" class="hidden">
 
 <section>
+
 <h2>You've been my world for</h2>
+
 <div class="timer" id="timer"></div>
+
 </section>
 
 <section>
@@ -188,10 +204,12 @@ No
 <h2>Our Memories 📸</h2>
 
 <div class="gallery">
+
 <img src="photo1.jpg">
 <img src="photo2.jpg">
 <img src="photo3.jpg">
 <img src="photo4.jpg">
+
 </div>
 
 </section>
@@ -299,7 +317,7 @@ years+" years "+
 
 setInterval(updateTimer,1000);
 
-const text="Dear Shreyu ❤️
+const text=`Dear Shreyu ❤️
 
 First of all… Happy Birthday to the cutest troublemaker in my life.
 
@@ -315,7 +333,9 @@ I hope today makes you as happy as you make me.
 
 Happy Birthday, Shreyu ❤️
 
-Now enjoy your day… but remember, I’m still your favorite person.";
+Now enjoy your day… but remember, I’m still your favorite person.
+
+— Sahil`;
 
 let i=0;
 
@@ -323,41 +343,28 @@ function typeWriter(){
 if(i<text.length){
 document.getElementById("typeText").innerHTML+=text.charAt(i);
 i++;
-setTimeout(typeWriter,40);
+setTimeout(typeWriter,30);
 }
 }
 
 typeWriter();
 
 function createHeart(){
-
 const heart=document.createElement("div");
-
 heart.classList.add("heart");
-
 heart.innerHTML="❤️";
-
 heart.style.left=Math.random()*100+"vw";
-
 heart.style.fontSize=Math.random()*20+10+"px";
-
 document.body.appendChild(heart);
-
 setTimeout(()=>{heart.remove()},6000);
-
 }
 
 setInterval(createHeart,300);
 
 function blowCandle(){
-
 document.querySelector(".cake").innerHTML="🎂✨";
-
 document.getElementById("cakeMessage").classList.remove("hidden");
-
 }
-
-/* stars */
 
 function createStars(){
 
