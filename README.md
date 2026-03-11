@@ -412,7 +412,7 @@ reasonIndex++;
 
 }else{
 
-alert("Okay okay… that's enough reasons for now 😄");
+alert("Okay okay… Aur bohot hai, but tum click karte karte thak jaogi na, isiliye filal keliye aage badte hai 😄");
 
 }
 
