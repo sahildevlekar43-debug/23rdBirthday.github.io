@@ -46,7 +46,7 @@ max-width:700px;
 position:absolute;
 background:white;
 border-radius:50%;
-opacity:.7;
+opacity:.6;
 }
 
 /* hearts */
@@ -62,10 +62,18 @@ animation:float 6s linear infinite;
 100%{transform:translateY(-110vh)}
 }
 
+/* timer */
+
+.timer{
+font-size:24px;
+color:#ff4d6d;
+}
+
 /* carousel */
 
 .carousel{
 position:relative;
+width:100%;
 max-width:600px;
 margin:auto;
 overflow:hidden;
@@ -73,17 +81,17 @@ overflow:hidden;
 
 .carousel-track{
 display:flex;
-transition:transform .7s ease;
+transition:transform .6s ease;
 }
 
 .slide{
 width:220px;
-margin:0 12px;
+margin:0 10px;
 border-radius:20px;
+transition:.5s;
 opacity:.5;
 filter:blur(3px);
 transform:scale(.8);
-transition:.5s;
 }
 
 .slide.active{
@@ -99,7 +107,7 @@ transform:translateY(-50%);
 background:#ff4d6d;
 border:none;
 color:white;
-font-size:24px;
+font-size:22px;
 border-radius:50%;
 padding:8px 14px;
 cursor:pointer;
@@ -108,17 +116,21 @@ cursor:pointer;
 .nav.left{left:10px}
 .nav.right{right:10px}
 
-/* buttons */
+/* reasons */
 
-button{
-padding:12px 26px;
-border:none;
-border-radius:30px;
+.reason{
 background:#ff4d6d;
-color:white;
-font-size:16px;
-cursor:pointer;
-margin-top:20px;
+margin:8px auto;
+padding:10px;
+border-radius:20px;
+width:250px;
+}
+
+/* message */
+
+.message{
+white-space:pre-line;
+line-height:1.7;
 }
 
 /* cake */
@@ -140,6 +152,17 @@ from{transform:scale(1)}
 to{transform:scale(1.3)}
 }
 
+button{
+padding:12px 26px;
+border:none;
+border-radius:30px;
+background:#ff4d6d;
+color:white;
+font-size:16px;
+cursor:pointer;
+margin-top:20px;
+}
+
 .hidden{display:none}
 
 </style>
@@ -159,11 +182,14 @@ to{transform:scale(1.3)}
 <!-- TIMER -->
 
 <section class="glass">
+
 <h2>You've been my world for</h2>
-<div id="timer"></div>
+
+<div id="timer" class="timer"></div>
+
 </section>
 
-<!-- PHOTO CAROUSEL -->
+<!-- MEMORIES -->
 
 <section class="glass">
 
@@ -181,8 +207,6 @@ to{transform:scale(1.3)}
 <img src="photo4.jpg" class="slide">
 <img src="photo5.jpg" class="slide">
 <img src="photo6.jpg" class="slide">
-<img src="photo7.jpg" class="slide">
-<img src="photo8.jpg" class="slide">
 
 </div>
 
@@ -204,41 +228,13 @@ to{transform:scale(1.3)}
 
 </section>
 
-<!-- QUIZ -->
-
-<section class="glass">
-
-<h2>Memory Quiz 😄</h2>
-
-<p>Our favourite activity?</p>
-
-<button onclick="quiz()">Talking nonsense</button>
-<button onclick="quiz()">Fighting</button>
-<button onclick="quiz()">Both</button>
-
-</section>
-
-<!-- GIFT -->
-
-<section class="glass">
-
-<h2>Open Your Gift 🎁</h2>
-
-<button onclick="openGift()">Tap to open</button>
-
-<p id="giftText" class="hidden">
-The best gift in my life was meeting you ❤️
-</p>
-
-</section>
-
 <!-- MESSAGE -->
 
 <section class="glass">
 
 <h2>A Message For You 💌</h2>
 
-<p id="typeText"></p>
+<p id="typeText" class="message"></p>
 
 </section>
 
@@ -251,14 +247,6 @@ The best gift in my life was meeting you ❤️
 <div class="cake" onclick="blowCandle()">🎂</div>
 
 <p id="cakeText" class="hidden">Happy Birthday Shreyu ❤️</p>
-
-</section>
-
-<!-- HOLD HAND -->
-
-<section class="glass">
-
-<button onclick="final()">Hold my hand ✋</button>
 
 </section>
 
@@ -292,52 +280,81 @@ const start=new Date("Dec 3 2023 19:00")
 setInterval(()=>{
 const diff=new Date()-start
 const d=Math.floor(diff/86400000)
-timer.innerHTML=d+" days together ❤️"
+const h=Math.floor(diff/3600000)%24
+const m=Math.floor(diff/60000)%60
+const s=Math.floor(diff/1000)%60
+
+timer.innerHTML=d+" days "+h+" hrs "+m+" min "+s+" sec"
+
 },1000)
 
 /* stars */
 
 for(let i=0;i<60;i++){
+
 let s=document.createElement("div")
+
 s.className="star"
+
 s.style.width=Math.random()*3+"px"
 s.style.height=s.style.width
+
 s.style.top=Math.random()*100+"vh"
 s.style.left=Math.random()*100+"vw"
+
 document.body.appendChild(s)
+
 }
 
-/* floating hearts */
+/* hearts */
 
 setInterval(()=>{
+
 let h=document.createElement("div")
+
 h.className="heart"
+
 h.innerHTML="❤️"
+
 h.style.left=Math.random()*100+"vw"
+
 document.body.appendChild(h)
+
 setTimeout(()=>h.remove(),6000)
-},300)
+
+},400)
 
 /* carousel */
 
-let slide=0
+let index=0
+
 const slides=document.querySelectorAll(".slide")
 
 function showSlides(){
+
 slides.forEach(s=>s.classList.remove("active"))
-slides[slide].classList.add("active")
-slide=(slide+1)%slides.length
+
+slides[index].classList.add("active")
+
 }
 
-setInterval(showSlides,4000)
+function moveSlide(dir){
+
+index+=dir
+
+if(index<0)index=slides.length-1
+
+if(index>=slides.length)index=0
+
 showSlides()
 
-function moveSlide(d){
-slide+=d
-if(slide<0)slide=slides.length-1
-if(slide>=slides.length)slide=0
-showSlides()
 }
+
+setInterval(()=>{
+moveSlide(1)
+},4000)
+
+showSlides()
 
 /* reasons */
 
@@ -356,24 +373,17 @@ function showReason(){
 if(r<reasonList.length){
 
 let div=document.createElement("div")
+
+div.className="reason"
+
 div.innerText=reasonList[r]
+
 reasons.appendChild(div)
+
 r++
 
 }
 
-}
-
-/* quiz */
-
-function quiz(){
-alert("Correct answer 😄")
-}
-
-/* gift */
-
-function openGift(){
-giftText.classList.remove("hidden")
 }
 
 /* typing message */
@@ -383,11 +393,17 @@ const text=`Dear Shreyu ❤️ First of all… Happy Birthday to the cutest trou
 let i=0
 
 function typeWriter(){
+
 if(i<text.length){
+
 typeText.innerHTML+=text.charAt(i)
+
 i++
+
 setTimeout(typeWriter,20)
+
 }
+
 }
 
 typeWriter()
@@ -401,10 +417,12 @@ cakeText.classList.remove("hidden")
 for(let i=0;i<40;i++){
 
 let c=document.createElement("div")
+
 c.style.position="fixed"
 c.style.width="6px"
 c.style.height="6px"
 c.style.background="white"
+
 c.style.top=Math.random()*100+"vh"
 c.style.left=Math.random()*100+"vw"
 
@@ -416,22 +434,20 @@ setTimeout(()=>c.remove(),2000)
 
 }
 
-/* final */
-
-function final(){
-finalPage.classList.remove("hidden")
-window.scrollTo(0,document.body.scrollHeight)
-}
-
 /* secret */
 
 let taps=0
 
 function secretTap(){
+
 taps++
+
 if(taps==5){
+
 alert("Secret message: I love you even more ❤️")
+
 }
+
 }
 
 </script>
