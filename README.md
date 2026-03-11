@@ -1,6 +1,8 @@
 <html>
 <head>
+
 <title>Happy Birthday Shreyu ❤️</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -11,10 +13,10 @@ font-family:'Segoe UI',sans-serif;
 color:white;
 text-align:center;
 overflow-x:hidden;
-background:linear-gradient(135deg,#0f0f0f,#2b0033,#000000);
+background:linear-gradient(135deg,#0f0f0f,#2b0033,#000);
 }
 
-/* loading screen */
+/* loading */
 
 #loading{
 position:fixed;
@@ -27,7 +29,7 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-z-index:1000;
+z-index:999;
 }
 
 .bar{
@@ -46,9 +48,7 @@ background:#ff4d6d;
 animation:load 3s forwards;
 }
 
-@keyframes load{
-to{width:100%}
-}
+@keyframes load{to{width:100%}}
 
 .hero{
 height:100vh;
@@ -93,34 +93,13 @@ display:none;
 max-width:600px;
 margin:auto;
 line-height:1.8;
-color:#ddd;
 white-space:pre-line;
-}
-
-.reason{
-background:#ff4d6d;
-margin:10px auto;
-width:250px;
-padding:10px;
-border-radius:20px;
-cursor:pointer;
+color:#ddd;
 }
 
 .cake{
 font-size:80px;
 cursor:pointer;
-}
-
-.heart{
-position:fixed;
-bottom:-20px;
-color:#ff4d6d;
-animation:float 6s linear infinite;
-}
-
-@keyframes float{
-0%{transform:translateY(0)}
-100%{transform:translateY(-110vh)}
 }
 
 .star{
@@ -136,6 +115,18 @@ from{opacity:.3}
 to{opacity:1}
 }
 
+.heart{
+position:fixed;
+bottom:-20px;
+color:#ff4d6d;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+100%{transform:translateY(-110vh)}
+}
+
 .fireworks{
 font-size:50px;
 animation:boom 1s infinite alternate;
@@ -146,40 +137,65 @@ from{transform:scale(1)}
 to{transform:scale(1.3)}
 }
 
+.reasonBox{
+margin-top:20px;
+}
+
+.reasonItem{
+background:#ff4d6d;
+margin:8px auto;
+padding:10px;
+border-radius:20px;
+width:250px;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- Loading -->
+<!-- loading -->
 
 <div id="loading">
+
 <h2>Preparing something special for Shreyu ❤️</h2>
-<div class="bar"><div class="progress"></div></div>
+
+<div class="bar">
+<div class="progress"></div>
 </div>
 
-<div id="stars"></div>
+</div>
 
-<!-- Page 1 -->
+<!-- page 1 -->
 
 <section class="hero hidden" id="page1">
+
 <h1 onclick="secretTap()">Shreyu ❤️</h1>
+
 <p>Sahil made something special for you</p>
+
 <button onclick="nextPage(1)">Continue</button>
+
 </section>
 
-<!-- Page 2 -->
+<!-- page 2 -->
 
 <section class="hero hidden" id="page2">
+
 <h2>Wait...</h2>
+
 <p>Are you really ready for this surprise?</p>
+
 <button onclick="nextPage(2)">Yes I am</button>
+
 </section>
 
-<!-- Page 3 -->
+<!-- page 3 -->
 
 <section class="hero hidden" id="page3">
+
 <h2>Important Question 😌</h2>
+
 <p>Are you ready for the surprise?</p>
 
 <div style="position:relative;height:120px">
@@ -191,30 +207,41 @@ No
 </button>
 
 </div>
+
 </section>
 
-<!-- Page 4 -->
+<!-- page 4 -->
 
 <section class="hero hidden" id="page4">
+
 <h2>Last chance 😄</h2>
+
 <p>Are you REALLY ready?</p>
+
 <button onclick="startSite()">Show me the surprise</button>
+
 </section>
 
-<!-- Main Page -->
+<!-- main site -->
 
 <div id="main" class="hidden">
 
 <section>
+
 <h2>You've been my world for</h2>
+
 <div class="timer" id="timer"></div>
+
 </section>
 
 <!-- photo slider -->
 
 <section>
+
 <h2>Our Memories 📸</h2>
+
 <div class="slider" id="slider">
+
 <img src="photo1.jpg">
 <img src="photo2.jpg">
 <img src="photo3.jpg">
@@ -223,48 +250,61 @@ No
 <img src="photo6.jpg">
 <img src="photo7.jpg">
 <img src="photo8.jpg">
+
 </div>
+
 </section>
 
 <!-- reasons -->
 
 <section>
+
 <h2>Reasons I Love You ❤️</h2>
 
-<div class="reason" onclick="reveal(this)">Your smile</div>
-<div class="reason" onclick="reveal(this)">Your madness</div>
-<div class="reason" onclick="reveal(this)">How you care</div>
-<div class="reason" onclick="reveal(this)">How you make normal days fun</div>
-<div class="reason" onclick="reveal(this)">Because you're you</div>
+<button onclick="showReason()">What more?</button>
+
+<div id="reasonsContainer" class="reasonBox"></div>
 
 </section>
 
 <!-- message -->
 
 <section>
+
 <h2>A Message For You 💌</h2>
+
 <p class="message" id="typeText"></p>
+
 </section>
 
 <!-- cake -->
 
 <section>
+
 <h2>Make a Birthday Wish 🎂</h2>
+
 <div class="cake" onclick="blowCandle()">🎂</div>
+
 <p id="cakeMessage" class="hidden">
+
 Happy Birthday Shreyu ❤️  
 I love you so much.  
+
 — Sahil
+
 </p>
+
 </section>
 
 <section>
+
 <button onclick="showFinal()">One Last Thing</button>
+
 </section>
 
 </div>
 
-<!-- Final Screen -->
+<!-- final page -->
 
 <section class="hero hidden" id="finalPage">
 
@@ -288,6 +328,8 @@ setTimeout(()=>{
 document.getElementById("loading").style.display="none";
 document.getElementById("page1").classList.remove("hidden");
 },3000);
+
+/* navigation */
 
 function nextPage(p){
 document.getElementById("page"+p).style.display="none";
@@ -337,16 +379,46 @@ if(slideIndex>slides.length)slideIndex=1;
 slides[slideIndex-1].style.display="block";
 setTimeout(showSlides,3000);
 }
+
 showSlides();
 
-/* reasons */
+/* reasons reveal */
 
-function reveal(el){
-el.style.background="#fff";
-el.style.color="#000";
+const reasons=[
+"Your beautiful smile",
+"Your madness",
+"The way you care",
+"How you make normal days fun",
+"How you irritate me but I still like you",
+"Because you are simply you",
+"And because life is better with you ❤️"
+];
+
+let reasonIndex=0;
+
+function showReason(){
+
+if(reasonIndex<reasons.length){
+
+const div=document.createElement("div");
+
+div.className="reasonItem";
+
+div.innerText=reasons[reasonIndex];
+
+document.getElementById("reasonsContainer").appendChild(div);
+
+reasonIndex++;
+
+}else{
+
+alert("Okay okay… that's enough reasons for now 😄");
+
 }
 
-/* message */
+}
+
+/* message typing */
 
 const text=`Dear Shreyu ❤️
 
@@ -354,88 +426,130 @@ First of all… Happy Birthday to the cutest troublemaker in my life.
 
 I honestly didn’t expect that one person could become such an important part of my life so quickly, but somehow you did it. Now you’re the person I talk to the most, think about the most, and the one who makes even normal days feel special.
 
-You have this amazing ability to make me laugh, irritate me a little, and still make me smile at the same time. Life with you is never boring, and I wouldn’t want it any other way.
+You have this amazing ability to make me laugh, irritate me a little, and still make me smile at the same time.
 
-Every random conversation, every joke, every small moment we share means more to me than you probably realize. Being with you just feels easy and comfortable, like things are exactly the way they should be.
-
-So on your birthday, I just want you to know that I’m really lucky to have you in my life.
-
-Happy Birthday, Shreyu ❤️
+Happy Birthday Shreyu ❤️
 
 — Sahil`;
 
 let i=0;
+
 function typeWriter(){
+
 if(i<text.length){
+
 document.getElementById("typeText").innerHTML+=text.charAt(i);
+
 i++;
+
 setTimeout(typeWriter,25);
+
 }
+
 }
+
 typeWriter();
 
 /* hearts */
 
 setInterval(()=>{
+
 const h=document.createElement("div");
+
 h.className="heart";
+
 h.innerHTML="❤️";
+
 h.style.left=Math.random()*100+"vw";
+
 document.body.appendChild(h);
+
 setTimeout(()=>h.remove(),6000);
+
 },300);
 
 /* stars */
 
 for(let i=0;i<60;i++){
+
 const s=document.createElement("div");
+
 s.className="star";
+
 s.style.width=Math.random()*3+"px";
+
 s.style.height=s.style.width;
+
 s.style.top=Math.random()*100+"vh";
+
 s.style.left=Math.random()*100+"vw";
+
 document.body.appendChild(s);
+
 }
 
-/* cake */
+/* cake + confetti */
 
 function blowCandle(){
-document.querySelector(".cake").innerHTML="🎂✨";
-document.getElementById("cakeMessage").classList.remove("hidden");
-confetti();
-}
 
-/* confetti */
+document.querySelector(".cake").innerHTML="🎂✨";
+
+document.getElementById("cakeMessage").classList.remove("hidden");
+
+confetti();
+
+}
 
 function confetti(){
+
 for(let i=0;i<50;i++){
+
 const c=document.createElement("div");
+
 c.style.position="fixed";
+
 c.style.width="6px";
+
 c.style.height="6px";
+
 c.style.background="white";
+
 c.style.top=Math.random()*100+"vh";
+
 c.style.left=Math.random()*100+"vw";
+
 document.body.appendChild(c);
+
 setTimeout(()=>c.remove(),2000);
+
 }
+
 }
 
 /* final */
 
 function showFinal(){
+
 document.getElementById("main").style.display="none";
+
 document.getElementById("finalPage").classList.remove("hidden");
+
 }
 
-/* secret message */
+/* secret tap */
 
 let taps=0;
+
 function secretTap(){
+
 taps++;
+
 if(taps==5){
+
 alert("Secret message: I love you even more than you know ❤️");
+
 }
+
 }
 
 </script>
