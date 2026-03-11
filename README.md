@@ -2,7 +2,6 @@
 <head>
 
 <title>Happy Birthday Shreyu ❤️</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -48,7 +47,9 @@ background:#ff4d6d;
 animation:load 3s forwards;
 }
 
-@keyframes load{to{width:100%}}
+@keyframes load{
+to{width:100%}
+}
 
 .hero{
 height:100vh;
@@ -90,7 +91,7 @@ display:none;
 }
 
 .message{
-max-width:600px;
+max-width:650px;
 margin:auto;
 line-height:1.8;
 white-space:pre-line;
@@ -137,16 +138,12 @@ from{transform:scale(1)}
 to{transform:scale(1.3)}
 }
 
-.reasonBox{
-margin-top:20px;
-}
-
 .reasonItem{
 background:#ff4d6d;
 margin:8px auto;
 padding:10px;
 border-radius:20px;
-width:250px;
+width:260px;
 }
 
 </style>
@@ -157,37 +154,26 @@ width:250px;
 <!-- loading -->
 
 <div id="loading">
-
 <h2>Preparing something special for Shreyu ❤️</h2>
-
 <div class="bar">
 <div class="progress"></div>
 </div>
-
 </div>
 
-<!-- page 1 -->
+<!-- intro page 1 -->
 
 <section class="hero hidden" id="page1">
-
 <h1 onclick="secretTap()">Shreyu ❤️</h1>
-
 <p>Sahil made something special for you</p>
-
 <button onclick="nextPage(1)">Continue</button>
-
 </section>
 
 <!-- page 2 -->
 
 <section class="hero hidden" id="page2">
-
 <h2>Wait...</h2>
-
 <p>Are you really ready for this surprise?</p>
-
 <button onclick="nextPage(2)">Yes I am</button>
-
 </section>
 
 <!-- page 3 -->
@@ -222,7 +208,7 @@ No
 
 </section>
 
-<!-- main site -->
+<!-- MAIN SITE -->
 
 <div id="main" class="hidden">
 
@@ -263,7 +249,7 @@ No
 
 <button onclick="showReason()">What more?</button>
 
-<div id="reasonsContainer" class="reasonBox"></div>
+<div id="reasonsContainer"></div>
 
 </section>
 
@@ -288,7 +274,7 @@ No
 <p id="cakeMessage" class="hidden">
 
 Happy Birthday Shreyu ❤️  
-I love you so much.  
+I love you so much.
 
 — Sahil
 
@@ -355,6 +341,7 @@ b.style.top=Math.random()*80+"px";
 const startDate=new Date("December 3 2023 19:00");
 
 setInterval(()=>{
+
 const diff=new Date()-startDate;
 
 const d=Math.floor(diff/86400000);
@@ -373,19 +360,25 @@ let slideIndex=0;
 const slides=document.querySelectorAll("#slider img");
 
 function showSlides(){
+
 slides.forEach(s=>s.style.display="none");
+
 slideIndex++;
+
 if(slideIndex>slides.length)slideIndex=1;
+
 slides[slideIndex-1].style.display="block";
+
 setTimeout(showSlides,3000);
+
 }
 
 showSlides();
 
-/* reasons reveal */
+/* reasons */
 
 const reasons=[
-"Your beautiful smile",
+"Your smile",
 "Your madness",
 "The way you care",
 "How you make normal days fun",
@@ -412,13 +405,13 @@ reasonIndex++;
 
 }else{
 
-alert("Okay okay… Aur bohot hai, but tum click karte karte thak jaogi na, isiliye filal keliye aage badte hai 😄");
+alert("Okay okay… that's enough reasons for now 😄");
 
 }
 
 }
 
-/* message typing */
+/* typing message */
 
 const text=`Dear Shreyu ❤️
 
@@ -426,9 +419,17 @@ First of all… Happy Birthday to the cutest troublemaker in my life.
 
 I honestly didn’t expect that one person could become such an important part of my life so quickly, but somehow you did it. Now you’re the person I talk to the most, think about the most, and the one who makes even normal days feel special.
 
-You have this amazing ability to make me laugh, irritate me a little, and still make me smile at the same time.
+You have this amazing ability to make me laugh, irritate me a little, and still make me smile at the same time. Life with you is never boring, and I wouldn’t want it any other way.
 
-Happy Birthday Shreyu ❤️
+Every random conversation, every joke, every small moment we share means more to me than you probably realize. Being with you just feels easy and comfortable, like things are exactly the way they should be.
+
+So on your birthday, I just want you to know that I’m really lucky to have you in my life. Thank you for being you — for your smile, your madness, your kindness, and for making my life a lot more fun.
+
+I hope today makes you as happy as you make me.
+
+Happy Birthday, Shreyu ❤️
+
+Now enjoy your day… but remember, I’m still your favorite person.
 
 — Sahil`;
 
@@ -442,7 +443,7 @@ document.getElementById("typeText").innerHTML+=text.charAt(i);
 
 i++;
 
-setTimeout(typeWriter,25);
+setTimeout(typeWriter,20);
 
 }
 
@@ -488,7 +489,7 @@ document.body.appendChild(s);
 
 }
 
-/* cake + confetti */
+/* cake */
 
 function blowCandle(){
 
@@ -536,7 +537,7 @@ document.getElementById("finalPage").classList.remove("hidden");
 
 }
 
-/* secret tap */
+/* secret */
 
 let taps=0;
 
