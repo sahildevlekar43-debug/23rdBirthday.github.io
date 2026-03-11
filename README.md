@@ -1,6 +1,5 @@
 <html>
 <head>
-
 <title>Happy Birthday Shreyu ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,10 +8,46 @@
 body{
 margin:0;
 font-family:'Segoe UI',sans-serif;
-background:#0f0f0f;
 color:white;
 text-align:center;
 overflow-x:hidden;
+background:linear-gradient(135deg,#0f0f0f,#2b0033,#000000);
+}
+
+/* loading screen */
+
+#loading{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:1000;
+}
+
+.bar{
+width:200px;
+height:8px;
+background:#333;
+border-radius:10px;
+margin-top:20px;
+overflow:hidden;
+}
+
+.progress{
+height:100%;
+width:0%;
+background:#ff4d6d;
+animation:load 3s forwards;
+}
+
+@keyframes load{
+to{width:100%}
 }
 
 .hero{
@@ -21,7 +56,6 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-animation:fade 1s;
 }
 
 .hidden{display:none;}
@@ -43,25 +77,33 @@ font-size:22px;
 font-weight:bold;
 }
 
-.gallery{
-display:flex;
-overflow-x:auto;
-gap:15px;
-padding:20px;
-}
-
-.gallery img{
-width:220px;
+.slider{
+width:260px;
+margin:auto;
+overflow:hidden;
 border-radius:20px;
 }
 
+.slider img{
+width:100%;
+display:none;
+}
+
 .message{
-max-width:500px;
+max-width:600px;
 margin:auto;
 line-height:1.8;
-color:#d6d6d6;
-font-size:18px;
+color:#ddd;
 white-space:pre-line;
+}
+
+.reason{
+background:#ff4d6d;
+margin:10px auto;
+width:250px;
+padding:10px;
+border-radius:20px;
+cursor:pointer;
 }
 
 .cake{
@@ -81,40 +123,21 @@ animation:float 6s linear infinite;
 100%{transform:translateY(-110vh)}
 }
 
-@keyframes fade{
-from{opacity:0}
-to{opacity:1}
-}
-
-/* stars */
-
-.stars{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
-z-index:-1;
-}
-
 .star{
 position:absolute;
 background:white;
 border-radius:50%;
+opacity:.7;
 animation:twinkle 2s infinite alternate;
 }
 
 @keyframes twinkle{
-from{opacity:0.2}
+from{opacity:.3}
 to{opacity:1}
 }
 
-/* fireworks */
-
 .fireworks{
-font-size:40px;
-margin-top:20px;
+font-size:50px;
 animation:boom 1s infinite alternate;
 }
 
@@ -128,41 +151,38 @@ to{transform:scale(1.3)}
 
 <body>
 
-<div class="stars" id="stars"></div>
+<!-- Loading -->
 
-<!-- PAGE 1 -->
+<div id="loading">
+<h2>Preparing something special for Shreyu ❤️</h2>
+<div class="bar"><div class="progress"></div></div>
+</div>
 
-<section class="hero" id="page1">
+<div id="stars"></div>
 
-<h1>Shreyu ❤️</h1>
+<!-- Page 1 -->
 
+<section class="hero hidden" id="page1">
+<h1 onclick="secretTap()">Shreyu ❤️</h1>
 <p>Sahil made something special for you</p>
-
 <button onclick="nextPage(1)">Continue</button>
-
 </section>
 
-<!-- PAGE 2 -->
+<!-- Page 2 -->
 
 <section class="hero hidden" id="page2">
-
-<h1>Wait...</h1>
-
+<h2>Wait...</h2>
 <p>Are you really ready for this surprise?</p>
-
 <button onclick="nextPage(2)">Yes I am</button>
-
 </section>
 
-<!-- PAGE 3 -->
+<!-- Page 3 -->
 
 <section class="hero hidden" id="page3">
-
-<h1>Important Question 😌</h1>
-
+<h2>Important Question 😌</h2>
 <p>Are you ready for the surprise?</p>
 
-<div style="position:relative;height:120px;">
+<div style="position:relative;height:120px">
 
 <button onclick="nextPage(3)">Yes I'm ready ❤️</button>
 
@@ -171,109 +191,107 @@ No
 </button>
 
 </div>
-
 </section>
 
-<!-- PAGE 4 -->
+<!-- Page 4 -->
 
 <section class="hero hidden" id="page4">
-
-<h1>Last chance 😄</h1>
-
+<h2>Last chance 😄</h2>
 <p>Are you REALLY ready?</p>
-
 <button onclick="startSite()">Show me the surprise</button>
-
 </section>
 
-<!-- MAIN PAGE -->
+<!-- Main Page -->
 
 <div id="main" class="hidden">
 
 <section>
-
 <h2>You've been my world for</h2>
-
 <div class="timer" id="timer"></div>
-
 </section>
 
+<!-- photo slider -->
+
 <section>
-
 <h2>Our Memories 📸</h2>
-
-<div class="gallery">
-
+<div class="slider" id="slider">
 <img src="photo1.jpg">
 <img src="photo2.jpg">
 <img src="photo3.jpg">
 <img src="photo4.jpg">
-
+<img src="photo5.jpg">
+<img src="photo6.jpg">
+<img src="photo7.jpg">
+<img src="photo8.jpg">
 </div>
+</section>
+
+<!-- reasons -->
+
+<section>
+<h2>Reasons I Love You ❤️</h2>
+
+<div class="reason" onclick="reveal(this)">Your smile</div>
+<div class="reason" onclick="reveal(this)">Your madness</div>
+<div class="reason" onclick="reveal(this)">How you care</div>
+<div class="reason" onclick="reveal(this)">How you make normal days fun</div>
+<div class="reason" onclick="reveal(this)">Because you're you</div>
 
 </section>
 
-<section>
+<!-- message -->
 
+<section>
 <h2>A Message For You 💌</h2>
-
 <p class="message" id="typeText"></p>
-
 </section>
 
+<!-- cake -->
+
 <section>
-
 <h2>Make a Birthday Wish 🎂</h2>
-
 <div class="cake" onclick="blowCandle()">🎂</div>
-
 <p id="cakeMessage" class="hidden">
-
 Happy Birthday Shreyu ❤️  
 I love you so much.  
-Thank you for being in my life.
-
 — Sahil
-
 </p>
-
 </section>
 
 <section>
-
-<h2>One Last Thing...</h2>
-
-<button onclick="showFinal()">Click here</button>
-
+<button onclick="showFinal()">One Last Thing</button>
 </section>
 
 </div>
 
-<!-- FINAL PAGE -->
+<!-- Final Screen -->
 
 <section class="hero hidden" id="finalPage">
 
-<h1>Happy Birthday Shreyu ❤️</h1>
+<h1>I Love You Shreyu ❤️</h1>
 
-<div class="fireworks">🎆 🎇 🎆 🎇</div>
+<div class="fireworks">🎆 🎇 🎆</div>
 
-<p>You are the most beautiful part of my life.</p>
-
-<p>Love you forever.</p>
-
-<p>— Sahil</p>
+<p>You make my life beautiful.</p>
 
 </section>
 
 <audio id="music" loop>
-<source src="music.mp3" type="audio/mpeg">
+<source src="music.mp3">
 </audio>
 
 <script>
 
-function nextPage(page){
-document.getElementById("page"+page).style.display="none";
-document.getElementById("page"+(page+1)).classList.remove("hidden");
+/* loading */
+
+setTimeout(()=>{
+document.getElementById("loading").style.display="none";
+document.getElementById("page1").classList.remove("hidden");
+},3000);
+
+function nextPage(p){
+document.getElementById("page"+p).style.display="none";
+document.getElementById("page"+(p+1)).classList.remove("hidden");
 }
 
 function startSite(){
@@ -282,39 +300,53 @@ document.getElementById("main").classList.remove("hidden");
 document.getElementById("music").play();
 }
 
+/* no button trap */
+
 function moveButton(){
-alert("Nice try 😄 You have to press YES.");
-const button=document.getElementById("noBtn");
-button.style.left=Math.random()*200+"px";
-button.style.top=Math.random()*80+"px";
+const b=document.getElementById("noBtn");
+b.style.left=Math.random()*200+"px";
+b.style.top=Math.random()*80+"px";
 }
 
-function showFinal(){
-document.getElementById("main").style.display="none";
-document.getElementById("finalPage").classList.remove("hidden");
-}
+/* timer */
 
-const startDate=new Date("December 3, 2023 19:00:00");
+const startDate=new Date("December 3 2023 19:00");
 
-function updateTimer(){
-const now=new Date();
-const diff=now-startDate;
+setInterval(()=>{
+const diff=new Date()-startDate;
 
-const seconds=Math.floor(diff/1000);
-const minutes=Math.floor(seconds/60);
-const hours=Math.floor(minutes/60);
-const days=Math.floor(hours/24);
-const years=Math.floor(days/365);
+const d=Math.floor(diff/86400000);
+const h=Math.floor(diff/3600000)%24;
+const m=Math.floor(diff/60000)%60;
+const s=Math.floor(diff/1000)%60;
 
 document.getElementById("timer").innerHTML=
-years+" years "+
-(days%365)+" days "+
-(hours%24)+" hours "+
-(minutes%60)+" minutes "+
-(seconds%60)+" seconds";
+d+" days "+h+" hrs "+m+" min "+s+" sec";
+
+},1000);
+
+/* slider */
+
+let slideIndex=0;
+const slides=document.querySelectorAll("#slider img");
+
+function showSlides(){
+slides.forEach(s=>s.style.display="none");
+slideIndex++;
+if(slideIndex>slides.length)slideIndex=1;
+slides[slideIndex-1].style.display="block";
+setTimeout(showSlides,3000);
+}
+showSlides();
+
+/* reasons */
+
+function reveal(el){
+el.style.background="#fff";
+el.style.color="#000";
 }
 
-setInterval(updateTimer,1000);
+/* message */
 
 const text=`Dear Shreyu ❤️
 
@@ -326,70 +358,85 @@ You have this amazing ability to make me laugh, irritate me a little, and still 
 
 Every random conversation, every joke, every small moment we share means more to me than you probably realize. Being with you just feels easy and comfortable, like things are exactly the way they should be.
 
-So on your birthday, I just want you to know that I’m really lucky to have you in my life. Thank you for being you — for your smile, your madness, your kindness, and for making my life a lot more fun.
-
-I hope today makes you as happy as you make me.
+So on your birthday, I just want you to know that I’m really lucky to have you in my life.
 
 Happy Birthday, Shreyu ❤️
-
-Now enjoy your day… but remember, I’m still your favorite person.
 
 — Sahil`;
 
 let i=0;
-
 function typeWriter(){
 if(i<text.length){
 document.getElementById("typeText").innerHTML+=text.charAt(i);
 i++;
-setTimeout(typeWriter,30);
+setTimeout(typeWriter,25);
 }
 }
-
 typeWriter();
 
-function createHeart(){
-const heart=document.createElement("div");
-heart.classList.add("heart");
-heart.innerHTML="❤️";
-heart.style.left=Math.random()*100+"vw";
-heart.style.fontSize=Math.random()*20+10+"px";
-document.body.appendChild(heart);
-setTimeout(()=>{heart.remove()},6000);
+/* hearts */
+
+setInterval(()=>{
+const h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},300);
+
+/* stars */
+
+for(let i=0;i<60;i++){
+const s=document.createElement("div");
+s.className="star";
+s.style.width=Math.random()*3+"px";
+s.style.height=s.style.width;
+s.style.top=Math.random()*100+"vh";
+s.style.left=Math.random()*100+"vw";
+document.body.appendChild(s);
 }
 
-setInterval(createHeart,300);
+/* cake */
 
 function blowCandle(){
 document.querySelector(".cake").innerHTML="🎂✨";
 document.getElementById("cakeMessage").classList.remove("hidden");
+confetti();
 }
 
-function createStars(){
+/* confetti */
 
-const container=document.getElementById("stars");
-
-for(let i=0;i<60;i++){
-
-const star=document.createElement("div");
-
-star.classList.add("star");
-
-const size=Math.random()*3;
-
-star.style.width=size+"px";
-star.style.height=size+"px";
-
-star.style.top=Math.random()*100+"vh";
-star.style.left=Math.random()*100+"vw";
-
-container.appendChild(star);
-
+function confetti(){
+for(let i=0;i<50;i++){
+const c=document.createElement("div");
+c.style.position="fixed";
+c.style.width="6px";
+c.style.height="6px";
+c.style.background="white";
+c.style.top=Math.random()*100+"vh";
+c.style.left=Math.random()*100+"vw";
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),2000);
+}
 }
 
+/* final */
+
+function showFinal(){
+document.getElementById("main").style.display="none";
+document.getElementById("finalPage").classList.remove("hidden");
 }
 
-createStars();
+/* secret message */
+
+let taps=0;
+function secretTap(){
+taps++;
+if(taps==5){
+alert("Secret message: I love you even more than you know ❤️");
+}
+}
 
 </script>
 
