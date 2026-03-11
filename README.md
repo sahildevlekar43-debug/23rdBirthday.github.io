@@ -14,16 +14,6 @@ background:linear-gradient(135deg,#0f0f0f,#2b0033,#000);
 overflow-x:hidden;
 }
 
-.glass{
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(10px);
-border-radius:20px;
-padding:25px;
-margin:30px auto;
-width:90%;
-max-width:700px;
-}
-
 /* loading */
 
 #loading{
@@ -32,26 +22,47 @@ width:100%;
 height:100%;
 background:black;
 display:flex;
-flex-direction:column;
 justify-content:center;
 align-items:center;
 z-index:999;
+font-size:22px;
 }
 
-/* buttons */
+/* glass cards */
 
-button{
-padding:14px 30px;
-border:none;
-border-radius:40px;
-background:#ff4d6d;
-color:white;
-font-size:18px;
-cursor:pointer;
-margin-top:20px;
+.glass{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(10px);
+border-radius:20px;
+padding:30px;
+margin:40px auto;
+width:90%;
+max-width:700px;
 }
 
-/* slider */
+/* stars */
+
+.star{
+position:absolute;
+background:white;
+border-radius:50%;
+opacity:.7;
+}
+
+/* hearts */
+
+.heart{
+position:fixed;
+bottom:-20px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+100%{transform:translateY(-110vh)}
+}
+
+/* carousel */
 
 .carousel{
 position:relative;
@@ -91,31 +102,23 @@ color:white;
 font-size:24px;
 border-radius:50%;
 padding:8px 14px;
+cursor:pointer;
 }
 
 .nav.left{left:10px}
 .nav.right{right:10px}
 
-/* hearts */
+/* buttons */
 
-.heart{
-position:fixed;
-bottom:-20px;
-animation:float 6s linear infinite;
-}
-
-@keyframes float{
-0%{transform:translateY(0)}
-100%{transform:translateY(-110vh)}
-}
-
-/* stars */
-
-.star{
-position:absolute;
-background:white;
-border-radius:50%;
-opacity:.7;
+button{
+padding:12px 26px;
+border:none;
+border-radius:30px;
+background:#ff4d6d;
+color:white;
+font-size:16px;
+cursor:pointer;
+margin-top:20px;
 }
 
 /* cake */
@@ -144,47 +147,25 @@ to{transform:scale(1.3)}
 
 <body>
 
-<div id="loading">
-<h2>Preparing something special for Shreyu ❤️</h2>
-</div>
+<div id="loading">Preparing something special for Shreyu ❤️</div>
 
-<!-- intro -->
+<!-- INTRO -->
 
-<section id="page1" class="hidden">
+<section class="glass">
 <h1 onclick="secretTap()">Shreyu ❤️</h1>
 <p>Sahil made something special for you</p>
-<button onclick="nextPage(1)">Continue</button>
 </section>
 
-<section id="page2" class="hidden">
-<h2>Wait...</h2>
-<p>Are you really ready for this surprise?</p>
-<button onclick="nextPage(2)">Yes I am</button>
-</section>
+<!-- TIMER -->
 
-<section id="page3" class="hidden">
-<h2>Important Question 😌</h2>
-
-<button onclick="nextPage(3)">Yes I'm ready ❤️</button>
-<button id="noBtn" onmouseover="moveButton()">No</button>
-
-</section>
-
-<section id="page4" class="hidden">
-<h2>Last chance 😄</h2>
-<button onclick="startSite()">Show me the surprise</button>
-</section>
-
-<!-- main -->
-
-<div id="main" class="hidden">
-
-<div class="glass">
+<section class="glass">
 <h2>You've been my world for</h2>
 <div id="timer"></div>
-</div>
+</section>
 
-<div class="glass">
+<!-- PHOTO CAROUSEL -->
+
+<section class="glass">
 
 <h2>Our Memories 📸</h2>
 
@@ -209,9 +190,11 @@ to{transform:scale(1.3)}
 
 </div>
 
-</div>
+</section>
 
-<div class="glass">
+<!-- REASONS -->
+
+<section class="glass">
 
 <h2>Reasons I Love You ❤️</h2>
 
@@ -219,9 +202,11 @@ to{transform:scale(1.3)}
 
 <div id="reasons"></div>
 
-</div>
+</section>
 
-<div class="glass">
+<!-- QUIZ -->
+
+<section class="glass">
 
 <h2>Memory Quiz 😄</h2>
 
@@ -231,9 +216,11 @@ to{transform:scale(1.3)}
 <button onclick="quiz()">Fighting</button>
 <button onclick="quiz()">Both</button>
 
-</div>
+</section>
 
-<div class="glass">
+<!-- GIFT -->
+
+<section class="glass">
 
 <h2>Open Your Gift 🎁</h2>
 
@@ -243,17 +230,21 @@ to{transform:scale(1.3)}
 The best gift in my life was meeting you ❤️
 </p>
 
-</div>
+</section>
 
-<div class="glass">
+<!-- MESSAGE -->
+
+<section class="glass">
 
 <h2>A Message For You 💌</h2>
 
 <p id="typeText"></p>
 
-</div>
+</section>
 
-<div class="glass">
+<!-- CAKE -->
+
+<section class="glass">
 
 <h2>Make a Birthday Wish 🎂</h2>
 
@@ -261,11 +252,17 @@ The best gift in my life was meeting you ❤️
 
 <p id="cakeText" class="hidden">Happy Birthday Shreyu ❤️</p>
 
-</div>
+</section>
 
-<button onclick="holdHand()">Hold my hand ✋</button>
+<!-- HOLD HAND -->
 
-</div>
+<section class="glass">
+
+<button onclick="final()">Hold my hand ✋</button>
+
+</section>
+
+<!-- FINAL -->
 
 <section id="finalPage" class="hidden">
 
@@ -285,29 +282,8 @@ The best gift in my life was meeting you ❤️
 
 setTimeout(()=>{
 loading.style.display="none"
-page1.classList.remove("hidden")
-},2000)
-
-/* pages */
-
-function nextPage(p){
-document.getElementById("page"+p).style.display="none"
-document.getElementById("page"+(p+1)).classList.remove("hidden")
-}
-
-function startSite(){
-page4.style.display="none"
-main.classList.remove("hidden")
 music.play()
-}
-
-/* trap */
-
-function moveButton(){
-noBtn.style.position="absolute"
-noBtn.style.left=Math.random()*200+"px"
-noBtn.style.top=Math.random()*100+"px"
-}
+},2000)
 
 /* timer */
 
@@ -319,37 +295,56 @@ const d=Math.floor(diff/86400000)
 timer.innerHTML=d+" days together ❤️"
 },1000)
 
-/* slider */
+/* stars */
 
-let i=0
+for(let i=0;i<60;i++){
+let s=document.createElement("div")
+s.className="star"
+s.style.width=Math.random()*3+"px"
+s.style.height=s.style.width
+s.style.top=Math.random()*100+"vh"
+s.style.left=Math.random()*100+"vw"
+document.body.appendChild(s)
+}
+
+/* floating hearts */
+
+setInterval(()=>{
+let h=document.createElement("div")
+h.className="heart"
+h.innerHTML="❤️"
+h.style.left=Math.random()*100+"vw"
+document.body.appendChild(h)
+setTimeout(()=>h.remove(),6000)
+},300)
+
+/* carousel */
+
+let slide=0
 const slides=document.querySelectorAll(".slide")
 
 function showSlides(){
-
 slides.forEach(s=>s.classList.remove("active"))
-
-slides[i].classList.add("active")
-
-i=(i+1)%slides.length
-
+slides[slide].classList.add("active")
+slide=(slide+1)%slides.length
 }
 
 setInterval(showSlides,4000)
 showSlides()
 
 function moveSlide(d){
-i+=d
-if(i<0)i=slides.length-1
-if(i>=slides.length)i=0
+slide+=d
+if(slide<0)slide=slides.length-1
+if(slide>=slides.length)slide=0
 showSlides()
 }
 
 /* reasons */
 
-const reasons=[
+const reasonList=[
 "Your smile",
 "Your madness",
-"The way you care",
+"How you care",
 "How you make normal days fun",
 "Because life is better with you"
 ]
@@ -357,12 +352,16 @@ const reasons=[
 let r=0
 
 function showReason(){
-if(r<reasons.length){
+
+if(r<reasonList.length){
+
 let div=document.createElement("div")
-div.innerText=reasons[r]
+div.innerText=reasonList[r]
 reasons.appendChild(div)
 r++
+
 }
+
 }
 
 /* quiz */
@@ -377,16 +376,16 @@ function openGift(){
 giftText.classList.remove("hidden")
 }
 
-/* message */
+/* typing message */
 
-const text=`Dear Shreyu ❤️ First of all… Happy Birthday to the cutest troublemaker in my life. I honestly didn’t expect that one person could become such an important part of my life so quickly, but somehow you did it...`
+const text=`Dear Shreyu ❤️ First of all… Happy Birthday to the cutest troublemaker in my life. I honestly didn’t expect that one person could become such an important part of my life so quickly, but somehow you did it. Now you’re the person I talk to the most, think about the most, and the one who makes even normal days feel special. You have this amazing ability to make me laugh, irritate me a little, and still make me smile at the same time. Life with you is never boring, and I wouldn’t want it any other way. Every random conversation, every joke, every small moment we share means more to me than you probably realize. Being with you just feels easy and comfortable, like things are exactly the way they should be. So on your birthday, I just want you to know that I’m really lucky to have you in my life. Thank you for being you — for your smile, your madness, your kindness, and for making my life a lot more fun. I hope today makes you as happy as you make me. Happy Birthday, Shreyu ❤️ Now enjoy your day… but remember, I’m still your favorite person.`
 
-let t=0
+let i=0
 
 function typeWriter(){
-if(t<text.length){
-typeText.innerHTML+=text.charAt(t)
-t++
+if(i<text.length){
+typeText.innerHTML+=text.charAt(i)
+i++
 setTimeout(typeWriter,20)
 }
 }
@@ -396,19 +395,38 @@ typeWriter()
 /* cake */
 
 function blowCandle(){
+
 cakeText.classList.remove("hidden")
+
+for(let i=0;i<40;i++){
+
+let c=document.createElement("div")
+c.style.position="fixed"
+c.style.width="6px"
+c.style.height="6px"
+c.style.background="white"
+c.style.top=Math.random()*100+"vh"
+c.style.left=Math.random()*100+"vw"
+
+document.body.appendChild(c)
+
+setTimeout(()=>c.remove(),2000)
+
+}
+
 }
 
 /* final */
 
-function holdHand(){
-main.style.display="none"
+function final(){
 finalPage.classList.remove("hidden")
+window.scrollTo(0,document.body.scrollHeight)
 }
 
 /* secret */
 
 let taps=0
+
 function secretTap(){
 taps++
 if(taps==5){
