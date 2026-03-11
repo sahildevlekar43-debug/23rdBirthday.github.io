@@ -2,15 +2,8 @@
 <html>
 <head>
 
-<title>Happy Birthday Shreya ❤️</title>
-
+<title>Happy Birthday Shreyu ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="theme-color" content="#ff4d6d">
-
-<link rel="manifest" href="manifest.json">
-
-<meta name="apple-mobile-web-app-capable" content="yes">
 
 <style>
 
@@ -23,17 +16,16 @@ text-align:center;
 overflow-x:hidden;
 }
 
-section{
-padding:40px 20px;
-}
-
 .hero{
 height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+animation:fade 1s;
 }
+
+.hidden{display:none;}
 
 button{
 padding:14px 30px;
@@ -72,8 +64,9 @@ color:#d6d6d6;
 font-size:18px;
 }
 
-.hidden{
-display:none;
+.cake{
+font-size:80px;
+cursor:pointer;
 }
 
 .heart{
@@ -88,57 +81,120 @@ animation:float 6s linear infinite;
 100%{transform:translateY(-110vh)}
 }
 
-.cake{
-font-size:80px;
-cursor:pointer;
+@keyframes fade{
+from{opacity:0}
+to{opacity:1}
+}
+
+/* stars */
+
+.stars{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:-1;
+}
+
+.star{
+position:absolute;
+background:white;
+border-radius:50%;
+animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:0.2}
+to{opacity:1}
+}
+
+/* fireworks */
+
+.fireworks{
+font-size:40px;
 margin-top:20px;
+animation:boom 1s infinite alternate;
+}
+
+@keyframes boom{
+from{transform:scale(1)}
+to{transform:scale(1.3)}
 }
 
 </style>
-
 </head>
 
 <body>
 
+<div class="stars" id="stars"></div>
 
-<section class="hero" id="start">
+<!-- PAGE 1 -->
 
-<h1>Shreya ❤️</h1>
-
+<section class="hero" id="page1">
+<h1>Shreyu ❤️</h1>
 <p>Sahil made something special for you</p>
+<button onclick="nextPage(1)">Continue</button>
+</section>
 
-<button onclick="startSite()">Are you ready for your surprise?</button>
+<!-- PAGE 2 -->
+
+<section class="hero hidden" id="page2">
+<h1>Wait...</h1>
+<p>Are you really ready for this surprise?</p>
+<button onclick="nextPage(2)">Yes I am</button>
+</section>
+
+<!-- PAGE 3 -->
+
+<section class="hero hidden" id="page3">
+
+<h1>Important Question 😌</h1>
+
+<p>Are you ready for the surprise?</p>
+
+<div style="position:relative;height:120px;">
+
+<button onclick="nextPage(3)">Yes I'm ready ❤️</button>
+
+<button id="noBtn" onmouseover="moveButton()" style="position:absolute">
+No
+</button>
+
+</div>
 
 </section>
 
+<!-- PAGE 4 -->
+
+<section class="hero hidden" id="page4">
+<h1>Last chance 😄</h1>
+<p>Are you REALLY ready?</p>
+<button onclick="startSite()">Show me the surprise</button>
+</section>
+
+<!-- MAIN PAGE -->
 
 <div id="main" class="hidden">
 
-
 <section>
-
 <h2>You've been my world for</h2>
-
 <div class="timer" id="timer"></div>
-
 </section>
-
 
 <section>
 
 <h2>Our Memories 📸</h2>
 
 <div class="gallery">
-
 <img src="photo1.jpg">
 <img src="photo2.jpg">
 <img src="photo3.jpg">
 <img src="photo4.jpg">
-
 </div>
 
 </section>
-
 
 <section>
 
@@ -148,7 +204,6 @@ margin-top:20px;
 
 </section>
 
-
 <section>
 
 <h2>Make a Birthday Wish 🎂</h2>
@@ -157,10 +212,9 @@ margin-top:20px;
 
 <p id="cakeMessage" class="hidden">
 
-Happy Birthday Shreya ❤️  
-May all your dreams come true.
-
-I love you more than words can explain.
+Happy Birthday Shreyu ❤️  
+I love you so much.  
+Thank you for being in my life.
 
 — Sahil
 
@@ -168,77 +222,112 @@ I love you more than words can explain.
 
 </section>
 
+<section>
+
+<h2>One Last Thing...</h2>
+
+<button onclick="showFinal()">Click here</button>
+
+</section>
+
 </div>
 
+<!-- FINAL PAGE -->
+
+<section class="hero hidden" id="finalPage">
+
+<h1>Happy Birthday Shreyu ❤️</h1>
+
+<div class="fireworks">🎆 🎇 🎆 🎇</div>
+
+<p>You are the most beautiful part of my life.</p>
+
+<p>Love you forever.</p>
+
+<p>— Sahil</p>
+
+</section>
 
 <audio id="music" loop>
-
 <source src="music.mp3" type="audio/mpeg">
-
 </audio>
-
 
 <script>
 
-
-function startSite(){
-
-document.getElementById("start").style.display="none";
-document.getElementById("main").classList.remove("hidden");
-
-document.getElementById("music").play();
-
+function nextPage(page){
+document.getElementById("page"+page).style.display="none";
+document.getElementById("page"+(page+1)).classList.remove("hidden");
 }
 
+function startSite(){
+document.getElementById("page4").style.display="none";
+document.getElementById("main").classList.remove("hidden");
+document.getElementById("music").play();
+}
 
+function moveButton(){
+alert("Nice try 😄 You have to press YES.");
+const button=document.getElementById("noBtn");
+button.style.left=Math.random()*200+"px";
+button.style.top=Math.random()*80+"px";
+}
 
-const startDate = new Date("December 3, 2023 19:00:00");
+function showFinal(){
+document.getElementById("main").style.display="none";
+document.getElementById("finalPage").classList.remove("hidden");
+}
+
+const startDate=new Date("December 3, 2023 19:00:00");
 
 function updateTimer(){
+const now=new Date();
+const diff=now-startDate;
 
-const now = new Date();
-const diff = now - startDate;
+const seconds=Math.floor(diff/1000);
+const minutes=Math.floor(seconds/60);
+const hours=Math.floor(minutes/60);
+const days=Math.floor(hours/24);
+const years=Math.floor(days/365);
 
-const seconds = Math.floor(diff/1000);
-const minutes = Math.floor(seconds/60);
-const hours = Math.floor(minutes/60);
-const days = Math.floor(hours/24);
-const years = Math.floor(days/365);
-
-document.getElementById("timer").innerHTML =
+document.getElementById("timer").innerHTML=
 years+" years "+
 (days%365)+" days "+
 (hours%24)+" hours "+
 (minutes%60)+" minutes "+
 (seconds%60)+" seconds";
-
 }
 
 setInterval(updateTimer,1000);
 
+const text="Dear Shreyu ❤️
 
+First of all… Happy Birthday to the cutest troublemaker in my life.
 
-const text = "Dear Shreya ❤️ From the moment you entered my life on 3 December 2023 at 7 PM everything became brighter. Every moment with you means the world to me. Happy Birthday my love. Forever yours — Sahil ❤️";
+I honestly didn’t expect that one person could become such an important part of my life so quickly, but somehow you did it. Now you’re the person I talk to the most, think about the most, and the one who makes even normal days feel special.
 
-let i = 0;
+You have this amazing ability to make me laugh, irritate me a little, and still make me smile at the same time. Life with you is never boring, and I wouldn’t want it any other way.
+
+Every random conversation, every joke, every small moment we share means more to me than you probably realize. Being with you just feels easy and comfortable, like things are exactly the way they should be.
+
+So on your birthday, I just want you to know that I’m really lucky to have you in my life. Thank you for being you — for your smile, your madness, your kindness, and for making my life a lot more fun.
+
+I hope today makes you as happy as you make me.
+
+Happy Birthday, Shreyu ❤️
+
+Now enjoy your day… but remember, I’m still your favorite person.";
+
+let i=0;
 
 function typeWriter(){
-
-if(i < text.length){
-
-document.getElementById("typeText").innerHTML += text.charAt(i);
-
+if(i<text.length){
+document.getElementById("typeText").innerHTML+=text.charAt(i);
 i++;
-
 setTimeout(typeWriter,40);
-
 }
-
 }
 
 typeWriter();
-
-
 
 function createHeart(){
 
@@ -260,8 +349,6 @@ setTimeout(()=>{heart.remove()},6000);
 
 setInterval(createHeart,300);
 
-
-
 function blowCandle(){
 
 document.querySelector(".cake").innerHTML="🎂✨";
@@ -270,8 +357,35 @@ document.getElementById("cakeMessage").classList.remove("hidden");
 
 }
 
-</script>
+/* stars */
 
+function createStars(){
+
+const container=document.getElementById("stars");
+
+for(let i=0;i<60;i++){
+
+const star=document.createElement("div");
+
+star.classList.add("star");
+
+const size=Math.random()*3;
+
+star.style.width=size+"px";
+star.style.height=size+"px";
+
+star.style.top=Math.random()*100+"vh";
+star.style.left=Math.random()*100+"vw";
+
+container.appendChild(star);
+
+}
+
+}
+
+createStars();
+
+</script>
 
 </body>
 </html>
